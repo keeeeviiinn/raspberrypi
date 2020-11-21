@@ -1,13 +1,13 @@
 import RPi.GPIO as GPIO
 import time
-
+GPIO.setwarnings(False)
 #configuracion de los pines
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
-TRIGER = 14
-ECHO = 15
-led = 18
+TRIGER = 23
+ECHO = 24
+led = 25
 
 #configuracion de las salidas
 
@@ -17,8 +17,8 @@ GPIO.setup(led, GPIO.OUT)
 
 print("Medución ultrasonico")
 
-try:
-	while True:
+r=
+while True:
 		GPIO.output(TRIGER, False)
 		time.sleep(0.5)
 		
@@ -34,10 +34,17 @@ try:
 			final = time.time()
 			
 		t = final-inicio
-		distancia_tiempo = t*34000
+		distancia_tiempo = t/0.000058
 		distancia= distancia_tiempo/2
 		
-		print("Distancia = %.1fcm"%distancia)
+		#print("Distancia = %.1fcm"%distancia_tiempo)
+	    #print(distancia_tiempo)
 		
-# except(KeyboardInterrupt):
-# 	GPIO.cleanup()
+		if distancia <20:
+            GPIO.output(led,True)
+            
+        if distancia > 20:
+            GPIO.output(led, False)
+	    
+#except(KeyboardInterrupt):
+ #   GPIO.cleanup()
