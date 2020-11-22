@@ -17,34 +17,36 @@ GPIO.setup(led, GPIO.OUT)
 
 print("Medución ultrasonico")
 
-r=
+r=True
 while True:
-		GPIO.output(TRIGER, False)
-		time.sleep(0.5)
+	GPIO.output(TRIGER, False)
+	time.sleep(0.001)
 		
-		GPIO.output(TRIGER, True)
-		time.sleep(0.00001)
-		GPIO.output(TRIGER, False)
-		inicio = time.time()
+	GPIO.output(TRIGER, True)
+	time.sleep(0.00001)
+	GPIO.output(TRIGER, False)
+	inicio = time.time()
 		
-		while GPIO.input(ECHO) ==0:
-			inicio=time.time()
+	while GPIO.input(ECHO) ==0:
+		inicio=time.time()
+		
 			
-		while GPIO.input(ECHO) ==1:
-			final = time.time()
-			
-		t = final-inicio
-		distancia_tiempo = t/0.000058
-		distancia= distancia_tiempo/2
+	while GPIO.input(ECHO) ==1:
+		final = time.time()
 		
+			
+	t = final-inicio
+	distancia_tiempo = t/0.000058
+	distancia= distancia_tiempo/2
+	print(distancia)	
 		#print("Distancia = %.1fcm"%distancia_tiempo)
 	    #print(distancia_tiempo)
 		
-		if distancia <20:
-            GPIO.output(led,True)
-            
-        if distancia > 20:
-            GPIO.output(led, False)
+# 	if distancia <20:
+#         GPIO.output(led, True)
+#             
+#     if distancia > 20:
+#         GPIO.output(led, False)
 	    
 #except(KeyboardInterrupt):
  #   GPIO.cleanup()
