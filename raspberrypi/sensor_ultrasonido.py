@@ -49,4 +49,4 @@ while True:
 #         GPIO.output(led, False)
 	    
 #except(KeyboardInterrupt):
- #   GPIO.cleanup()
+    

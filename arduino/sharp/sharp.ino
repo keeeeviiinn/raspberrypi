@@ -3,11 +3,19 @@ int sensor_izquierdo = A1;
 float lectura_izquierdo;
 int dist_izquierdo;
 
+const int triger = 4;
+const int echo = 3;
+long tiempo;
+int distancia;
+    
 // the setup routine runs once when you press reset:
 void setup() {                
   // initialize the digital pin as an output.
-  pinMode(led, OUTPUT); 
-  Serial.begin(9600);      
+  pinMode(led, OUTPUT);
+  pinMode(triger, OUTPUT);
+  pinMode(echo, INPUT); 
+  Serial.begin(9600);
+   
 }
 
 // the loop routine runs over and over again forever:
@@ -15,9 +23,17 @@ void loop() {
   
   
   sharp();
+  sensorultrasonido();
   int sharp_izq = dist_izquierdo;
-  Serial.println(dist_izquierdo);
-  delay(100);//este tiempo debe estar si o si entre envio y recibo o si no no recibe desde serial
+  
+  Serial.print(dist_izquierdo);
+  //Serial.println(" sharp");
+  //delay(100);
+  Serial.print(distancia);
+  //Serial.println(" ultra");
+  delay(100);
+  
+  //delay(100);//este tiempo debe estar si o si entre envio y recibo o si no no recibe desde serial
   
   
   /*if (dist_izquierdo < 20) 
@@ -55,5 +71,18 @@ void sharp(){
       dist_izquierdo=pow(3027.4/lectura_izquierdo,1.2134);
       
       
+   
+ }
+ 
+ void sensorultrasonido()
+ {
+   
+   digitalWrite(triger, LOW);
+   delayMicroseconds(2);
+   
+   digitalWrite(triger, HIGH);
+   delayMicroseconds(10);
+   tiempo=pulseIn(echo, HIGH);
+   distancia = tiempo/58;
    
  }
